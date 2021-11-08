@@ -1,0 +1,99 @@
+<%- include("template/cabecera", {tituloweb: 'Detalles del Registro' }) %>
+
+
+
+    <div class="w3-card-4">
+
+        
+        <% if (error) { %>
+            <%= mensaje %>
+                <a href="/mascotas" class="w3-button w3-red">
+                    Volver
+                </a>
+                <% } %>
+
+                    <% if (!error) { %>
+                      
+                            <div class="w3-container w3-teal"><h1>Detalle del Registro</h1></div>
+
+                        <form class="w3-container" id="editar" data-id="<%= mascota.id %>">
+                            <label class="w3-text-teal"><b>Identificador</b></label>
+                            <input type="text" value="<%= mascota.id %>" class="w3-input w3-border w3-light-grey" name="id" readonly="readonly">
+                            <label class="w3-text-teal"><b>Nombre</b></label>
+                            <input type="text" value="<%= mascota.nombre %>" class="w3-input w3-border w3-light-grey" name="nombre" id="nombreInput">
+                            <label class="w3-text-teal"><b>Apellido</b></label>
+                            <input type="text" value="<%= mascota.apellido %>" class="w3-input w3-border w3-light-grey" name="apellido"
+
+                                id="descripcionInput">
+                            <hr>
+                            <button class="w3-button w3-block w3-red" type="submit">Guardar Cambios</button>
+                        </form>
+
+                        <hr>   
+                        <div class="w3-container w3-center" >
+                            <div class="w3-bar" style="width:30%">
+                            <button  id="elimino" class="w3-button w3-block w3-red" data-id="<%= mascota.id %>">Eliminar</button>
+                            </div>
+                        </div>           
+                                
+                        <% } %>
+
+    </div>
+
+    <%- include("template/footer") %>
+
+    <script>
+        // onclick vs addEventListener
+        // https://stackoverflow.com/questions/6348494/addeventlistener-vs-onclick#:~:text=Essentially%20onclick%20is%20a%20HTML,(using%20this%20for%20example).
+       
+        // aqui se usa para eliminar registro
+        const btnEliminar = document.querySelector('#elimino')
+        btnEliminar.addEventListener('click', async () => {
+            console.log(btnEliminar.dataset.id)
+            try {
+                // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+                const data = await fetch(`/mascotas/${btnEliminar.dataset.id}`, {
+                    method: 'delete'
+                })
+                const res = await data.json()
+                console.log(res)
+                if (res.estado) {
+                    window.location.href = '/mascotas'
+                } else {
+                    console.log(res)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+
+        // Desde aqui lo utilizamos para editar
+        const formEditar = document.querySelector('#editar');
+
+            formEditar.addEventListener('submit', async (e) => {
+                e.preventDefault()
+                // Alternativa #1 (capturar input)
+                const nombre = formEditar.elements['nombre'].value
+                // Alternativa #2 (capturar input)
+                const descripcion = document.querySelector('#descripcionInput').value
+                const id = formEditar.dataset.id
+
+                const data = await fetch(`/mascotas/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify({ nombre, descripcion })
+                })
+
+                const res = await data.json()
+
+                if (res.estado) {
+                    window.location.href = '/mascotas'
+                } else {
+                    console.log(res)
+                }
+
+            })
+    </script>

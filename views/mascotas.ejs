@@ -2,7 +2,8 @@
 
 
     <div class="container">
-        <h2>Responsive Table</h2>
+              
+        <p><a class="w3-button w3-block w3-teal" href="/mascotas/crear">Crear Nuevo Miembro</a></p>
         <div class="w3-responsive">
             <table class="w3-table-all">
                 <thead>
@@ -26,7 +27,7 @@
                                 <td>
                                     <%= mascota.apellido %>
                                 </td>
-                                <td>Nothing so far</td>
+                                <td><a class="w3-button w3-green" href="mascotas/<%= mascota.id %>">Editar</a></td>
                             </tr>
                             <% }) %>
                                 <% } %>

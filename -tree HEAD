@@ -1,0 +1,19 @@
+[33mcommit 54347a7b8b6b0e46a96ab6eb7b39371e98347764[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31mheroku/master[m[33m)[m
+Author: “moralex74ve” <“moralex74@gmail.com”>
+Date:   Mon Nov 8 09:06:41 2021 -0400
+
+    make2 it better
+
+[1mdiff --git a/views/template/navbar.ejs b/views/template/navbar.ejs[m
+[1mindex f2fbeeb..0f4c21e 100644[m
+[1m--- a/views/template/navbar.ejs[m
+[1m+++ b/views/template/navbar.ejs[m
+[36m@@ -1,6 +1,6 @@[m
+ <ul>[m
+[31m-    <li><a class="active" href="#home">Home</a></li>[m
+[31m-    <li><a href="#news">News</a></li>[m
+[32m+[m[32m    <li><a class="active" href="/">Home</a></li>[m
+[32m+[m[32m    <li><a href="/mascotas">Miembros</a></li>[m
+     <li><a href="#contact">Contact</a></li>[m
+     <li><a href="#about">About</a></li>[m
+ [m
