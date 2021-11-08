@@ -18,15 +18,14 @@
 
                         <form class="w3-container" id="editar" data-id="<%= mascota.id %>">
                             <label class="w3-text-teal"><b>Identificador</b></label>
-                            <input type="text" value="<%= mascota.id %>" class="w3-input w3-border w3-light-grey" name="id" readonly="readonly">
+                            <input type="text" value="<%= mascota.id %>" class="w3-input w3-border w3-light-grey"  readonly="readonly">
                             <label class="w3-text-teal"><b>Nombre</b></label>
                             <input type="text" value="<%= mascota.nombre %>" class="w3-input w3-border w3-light-grey" name="nombre" id="nombreInput">
                             <label class="w3-text-teal"><b>Apellido</b></label>
-                            <input type="text" value="<%= mascota.apellido %>" class="w3-input w3-border w3-light-grey" name="apellido"
-
-                                id="descripcionInput">
+                            <input type="text" value="<%= mascota.apellido %>" class="w3-input w3-border w3-light-grey" name="apellido" id="apellidoInput">
                             <hr>
-                            <button class="w3-button w3-block w3-red" type="submit">Guardar Cambios</button>
+                            <button id="editar" class="w3-button w3-block w3-red" type="submit">Guardar Cambios</button>
+                            
                         </form>
 
                         <hr>   
@@ -75,7 +74,7 @@
                 // Alternativa #1 (capturar input)
                 const nombre = formEditar.elements['nombre'].value
                 // Alternativa #2 (capturar input)
-                const descripcion = document.querySelector('#descripcionInput').value
+                const apellido = document.querySelector('#apellidoInput').value
                 const id = formEditar.dataset.id
 
                 const data = await fetch(`/mascotas/${id}`, {
@@ -84,7 +83,7 @@
                         'Content-Type': 'application/json'
                         // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: JSON.stringify({ nombre, descripcion })
+                    body: JSON.stringify({ nombre, apellido })
                 })
 
                 const res = await data.json()
